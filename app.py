@@ -123,8 +123,8 @@ class RenderCard:
             artist_name=artist_name,
             apple_icon=icon,
             barPalette=barPalette,
-            songPalette=songPalette
-            contentBar=contentBar
+            songPalette=songPalette,
+            contentBar=contentBar,
             barCSS=barCSS
         )
 
