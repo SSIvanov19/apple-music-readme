@@ -1,5 +1,6 @@
 from base64 import b64encode
 from dotenv import load_dotenv
+from colorthief import ColorThief
 from flask import Flask, Response, render_template
 import os
 from pprint import pprint
