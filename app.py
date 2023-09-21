@@ -31,7 +31,7 @@ class RenderCard:
         res = requests.get(img_url, headers={}, cookies={})
         return b64encode(res.content).decode("ascii")
 
-    def gradientGen(albumArtURL, color_count):
+    def gradientGen(self, albumArtURL, color_count):
         colortheif = ColorThief(BytesIO(requests.get(albumArtURL).content))
         palette = colortheif.get_palette(color_count)
         return palette
@@ -77,7 +77,7 @@ class RenderCard:
 
         self.__data = random.choice(album_data)
 
-    def barGen(barCount):
+    def barGen(self, barCount):
         barCSS = ""
         left = 1
         for i in range(1, barCount + 1):
