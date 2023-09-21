@@ -31,6 +31,11 @@ class RenderCard:
         res = requests.get(img_url, headers={}, cookies={})
         return b64encode(res.content).decode("ascii")
 
+    def gradientGen(albumArtURL, color_count):
+        colortheif = ColorThief(BytesIO(requests.get(albumArtURL).content))
+        palette = colortheif.get_palette(color_count)
+        return palette
+
     def __fetch_recent_albums(self):
         """
         Fetches recently played albums from Apple Music.
@@ -72,6 +77,24 @@ class RenderCard:
 
         self.__data = random.choice(album_data)
 
+    def barGen(barCount):
+        barCSS = ""
+        left = 1
+        for i in range(1, barCount + 1):
+            anim = random.randint(500, 1000)
+            # below code generates random cubic-bezier values
+            x1 = random.random()
+            y1 = random.random()*2
+            x2 = random.random()
+            y2 = random.random()*2
+            barCSS += (
+                ".bar:nth-child({})  {{ left: {}px; animation-duration: 15s, {}ms; animation-timing-function: ease, cubic-bezier({},{},{},{}); }}".format(
+                    i, left, anim, x1, y1, x2, y2
+                )
+            )
+            left += 4
+        return barCSS
+
     def generate_card(self):
         """Generates the SVG card
 
@@ -85,6 +108,13 @@ class RenderCard:
 
         album_name = (album_name[:20] + "...") if len(album_name) > 22 else album_name
         icon = self.__apple_music_icon_b64()
+        
+        barPalette = gradientGen(self.__data["image_url"], 2)
+        songPalette = gradientGen(self.__data["image_url"], 4)
+
+        barCount = 84
+        contentBar = "".join(["<div class='bar'></div>" for _ in range(barCount)])
+        barCSS = barGen(barCount)
 
         svg = render_template(
             "card.html.j2",
@@ -92,6 +122,10 @@ class RenderCard:
             album_name=album_name,
             artist_name=artist_name,
             apple_icon=icon,
+            barPalette=barPalette,
+            songPalette=songPalette
+            contentBar=contentBar
+            barCSS=barCSS
         )
 
         return svg
