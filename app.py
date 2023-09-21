@@ -109,12 +109,12 @@ class RenderCard:
         album_name = (album_name[:20] + "...") if len(album_name) > 22 else album_name
         icon = self.__apple_music_icon_b64()
         
-        barPalette = gradientGen(self.__data["image_url"], 2)
-        songPalette = gradientGen(self.__data["image_url"], 4)
+        barPalette = self.gradientGen(self.__data["image_url"], 2)
+        songPalette = self.gradientGen(self.__data["image_url"], 4)
 
         barCount = 84
         contentBar = "".join(["<div class='bar'></div>" for _ in range(barCount)])
-        barCSS = barGen(barCount)
+        barCSS = self.barGen(barCount)
 
         svg = render_template(
             "card.html.j2",
