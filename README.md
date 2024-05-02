@@ -7,11 +7,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <img src="https://apple-music-readme.vercel.app/">
+  <img src="https://apple-music-readme-eight.vercel.app/?">
   <h2 align="center">Apple Music Card</h3>
 
 <p align="center">
-    A card to show random album from your recents in Apple Music Library
+    A card to show random album from your recents in Apple Music Library. Fork of <a href="https://github.com/radioactive11/apple-music-readme">radioactive11's version</a>, but in the style of <a href="https://github.com/novatorem/novatorem">novatorem's Spotify version</a>.
 </p>
 <br>
 </div>
